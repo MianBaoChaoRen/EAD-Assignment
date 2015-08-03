@@ -58,9 +58,6 @@ function chkForm(){
 	var emailval = /^([a-zA-Z0-9]{3,})+([@]{1,1})+[a-zA-Z_]+\.[a-zA-Z]{3,}$/;
 	var validemail = txtUseridField.value.match(emailval);
 	
-	var username5digit = /^([Pp]\d{5})$/;
-	var validusername = txtUseridField.value.match(username5digit);
-	
 	var password8digit = /^[a-zA-Z0-9]{8,}$/;
 	var validpassword = passwordField.value.match(password8digit);
 	
@@ -94,13 +91,6 @@ function chkForm(){
 	
 }
 
-</script>
-<script type="text/javascript">
-function chkForm(){
-    document.getElementById("myButton").onclick = function () {
-        location.href = "www.yoursite.com";
-    };
-}
 </script>
 
         <div class="container">
