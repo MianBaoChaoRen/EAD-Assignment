@@ -53,7 +53,7 @@ function chkForm(){
 	var password=passwordField.value;
 	
 	var error=false;
-	var errMsg="<br/><br/><br/>";
+	var errMsg="<br/><br/><br/><br/><br/><br/>";
 	
 	var emailval = /^([a-zA-Z0-9]{3,})+([@]{1,1})+[a-zA-Z_]+\.[a-zA-Z]{3,}$/;
 	var validemail = txtUseridField.value.match(emailval);
@@ -95,13 +95,6 @@ function chkForm(){
 }
 
 </script>
-<script type="text/javascript">
-function chkForm(){
-    document.getElementById("myButton").onclick = function () {
-        location.href = "www.yoursite.com";
-    };
-}
-</script>
 
         <div class="container">
 			<header>			
@@ -119,6 +112,9 @@ function chkForm(){
 				    </p>
 				    <p class="clearfix">
 				        <input type="submit" name="submit" value="Sign in" onclick="return chkForm()" >
+				        <a href="register.html">
+   							<input type="button" value="Register Here!" />
+						</a>
 				    </p>
 				    <div id="msgBox"></div> 
 				</form>​

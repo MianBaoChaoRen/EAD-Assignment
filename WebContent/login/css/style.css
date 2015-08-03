@@ -1,6 +1,22 @@
 @import url('demo.css');
 @import url('font-awesome.css');
 
+
+.registerheading {
+	/* Size and position */
+    padding-top: 9px;
+    padding-bottom: 9px;
+
+    /* Styles */
+    color: #ddd;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 #000;
+    text-indent: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
 /* GLOBALS */
 
 *,
@@ -441,7 +457,10 @@
 }
 
 .form-3 input[type=text],
-.form-3 input[type=password] {
+.form-3 input[type=password],
+.form-3 input[type=tel],
+.form-3 input[type=date],
+.form-3 input[type=email] {
     /* Size and position */
     width: 50%;
     float: left;
@@ -505,7 +524,8 @@
     vertical-align: middle;
 }
 
-.form-3 input[type=submit] {
+.form-3 input[type=submit], 
+.form-3 input[type=button] {
     /* Width and position */
     width: 100%;
     padding: 8px 5px;
