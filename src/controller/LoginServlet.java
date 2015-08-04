@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.*;
-
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/login/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,10 +36,6 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String name=request.getParameter("name");
-		String contact=request.getParameter("contact");
-		String dob=request.getParameter("birthday");
-		String address=request.getParameter("address");
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
 		
@@ -53,46 +45,39 @@ public class RegisterServlet extends HttpServlet {
 		String passwordval ="^[a-zA-Z0-9]{8,}$";
 		boolean validpassword = password.matches(passwordval);
 		
-		String contactval = "^[0-9]{8,8}$";
-		boolean validcontact = contact.matches(contactval);
-		
 		boolean error=false;
 		String errMsg="<br/><br/>";
 		
-		if (email == "" && password =="" && contact == "" && name =="" && dob =="" && address ==""){
+		if (email == "" && password ==""){
 			error=true;
-		}else if (name==""){
-			error=true;
-		}else if (contact==""){
-			error=true;
-		}else if (dob==""){
-			error=true;
-		}else if (address==""){
-			error=true;
+			errMsg+="Please enter your Username and Password <br/>";
+			
 		}else if(email == ""){
 			error=true;
+			errMsg+="Please enter your Username<br/>";	
 		}else if (password==""){
 			error=true;
+			errMsg+="Please enter your Password";
 		}else if (validemail == false) {
 			error=true;
+			errMsg+="Please enter a Valid Username <br/>";
 		}else if (validpassword == false){
 			error=true;
-		}else if (validcontact == false){
-			error=true;
+			errMsg+="Please enter a Valid Password <br/>";
 		}
 		
 		if(error){
-			response.sendRedirect("register.html");
-		}
-		
-		member mem=new member(0,name,contact,dob,address,email,password);
-		
-		memberDB db=new memberDB();
-		boolean success=db.insertMember(mem);
-		
-		if (success){
 			response.sendRedirect("login.html");
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 

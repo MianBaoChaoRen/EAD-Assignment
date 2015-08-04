@@ -5,6 +5,8 @@ import java.sql.*;
 
 import javax.servlet.http.HttpSession;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 public class memberDB {
 	public static Connection getConnectionDB() throws Exception{
 		// Step1: Load JDBC Driver
@@ -30,7 +32,7 @@ public class memberDB {
 			pstmt.setString(2, mem.getContact());
 			pstmt.setString(3,mem.getDob());
 			pstmt.setString(4,mem.getAddress());
-			pstmt.setString(5,mem.getAddress());
+			pstmt.setString(5,mem.getEmail());
 			pstmt.setString(6,mem.getPassword());
 			
 			int count= pstmt.executeUpdate();
