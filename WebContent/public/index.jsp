@@ -166,7 +166,10 @@
 							if (Featured == 1){
 							
 					%> 
+					
 						<div class="col-sm-4 col-lg-4 col-md-4">
+						<form action = "AddCartServlet" method = "get">
+						<input type ="hidden" name = "productID" value = <%= productID %>>
 							<div class="thumbnail">
 								<img src='<%= imagePath %>' alt="">
 									<div class="caption">
@@ -236,9 +239,11 @@
 					                			break;
 					                		}
 					                   		%>
+					                 	<input type = "submit" value = "Add To Cart"/>
 					                 	</p>
 					        	</div>
 				         	</div>
+				         	</form>
 			         	</div>
 					<%
 							}
