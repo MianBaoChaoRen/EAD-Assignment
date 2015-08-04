@@ -3,21 +3,9 @@ import java.util.*;
 import java.sql.*;
 
 public class CartDB {
-	public Connection getConnDB() throws Exception{
-		//Step1: Load JDBC Driver
-		Class.forName("com.mysql.jdbc.Driver");
-
-		//Step2: Define connection URL
-		String connURL = "jdbc:mysql://localhost/onlineshop?user=root&password=fush29";
-
-		//Step3: Establish connection to URL
-		Connection conn = DriverManager.getConnection(connURL);
-		return conn;
-	}
-	
 	public ArrayList<Cart> addToCart(int id){
 		try{
-			Connection conn = getConnDB();
+			Connection conn=connDB.getConnectionDB();
 			String sqlStr = "Select * from product where ProductID LIKE ?";
 			PreparedStatement pstmt = conn.prepareStatement(sqlStr);
 			pstmt.setInt(1, id);

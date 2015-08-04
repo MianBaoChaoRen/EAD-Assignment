@@ -8,20 +8,12 @@ import javax.servlet.http.HttpSession;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public class memberDB {
-	public static Connection getConnectionDB() throws Exception{
-		// Step1: Load JDBC Driver
-		Class.forName("com.mysql.jdbc.Driver");
-		// Step 2: Define Connection URL
-		String connURL ="jdbc:mysql://localhost/assignment_spit?user=root&password=1234";
-		// Step 3 : Establish connection URL
-		Connection conn = DriverManager.getConnection(connURL);
-		return conn;
-	}
+	
 	
 	public boolean insertMember(member mem){
 		try {
 			
-			Connection conn=getConnectionDB();
+			Connection conn=connDB.getConnectionDB();
 
 			String registersql="insert into member (name,contact,dob,address,email,password)" +
 					" Values(?,?,?,?,?,?)";
@@ -52,7 +44,7 @@ public class memberDB {
 	
 	public boolean verifyMember(member mem){
 		try{
-			Connection conn=getConnectionDB();
+			Connection conn=connDB.getConnectionDB();
 			
 			String verifyadminsql="select * from admin where userid = ? and password = ? and ban=0";
 			String verifybanadminsql="select * from admin where userid = ? and password = ? and ban=1 ";
