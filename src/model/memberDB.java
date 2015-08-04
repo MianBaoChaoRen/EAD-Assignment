@@ -49,4 +49,49 @@ public class memberDB {
 			//return null;
 		}
 	}
+	
+	public boolean verifyMember(member mem){
+		try{
+			Connection conn=getConnectionDB();
+			
+			String verifyadminsql="select * from admin where userid = ? and password = ? and ban=0";
+			String verifybanadminsql="select * from admin where userid = ? and password = ? and ban=1 ";
+			
+			PreparedStatement verifyadminpstmt=conn.prepareStatement(verifyadminsql);
+			PreparedStatement verifybanadminpstmt=conn.prepareStatement(verifybanadminsql);
+			
+			verifyadminpstmt.setString(1, userid);
+			verifyadminpstmt.setString(2, password);
+			verifybanadminpstmt.setString(1, userid);
+			verifybanadminpstmt.setString(2, password);
+			
+			ResultSet verifyadminrs= verifyadminpstmt.executeQuery();
+			ResultSet verifybanadminrs= verifybanadminpstmt.executeQuery();
+			
+			if (verifybanadminrs.next() ) {
+   					out.println("Your Account has been suspended. Please Contact the Head Admin to verify.");
+   			} else if (verifyadminrs.next()){
+   					response.sendRedirect("../admin/dashboard.jsp");
+   				} else {
+   			
+   				response.sendRedirect("login.html");
+   				}
+			
+		} catch (Exception e){
+			System.out.println(e);
+			return false;
+		}
+		
+		
+		
+	}
 }
+
+
+
+
+
+
+
+
+
