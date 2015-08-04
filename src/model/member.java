@@ -15,6 +15,13 @@ public class member {
 	}
 	
 	
+	public member(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+
+
 	public member(int memberID, String name, String contact, String dob,
 			String address, String email, String password) {
 		super();

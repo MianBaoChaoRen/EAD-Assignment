@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.*;
+
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/login/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -46,34 +48,35 @@ public class LoginServlet extends HttpServlet {
 		boolean validpassword = password.matches(passwordval);
 		
 		boolean error=false;
-		String errMsg="<br/><br/>";
 		
 		if (email == "" && password ==""){
-			error=true;
-			errMsg+="Please enter your Username and Password <br/>";
-			
+			error=true;	
 		}else if(email == ""){
-			error=true;
-			errMsg+="Please enter your Username<br/>";	
+			error=true;	
 		}else if (password==""){
 			error=true;
-			errMsg+="Please enter your Password";
 		}else if (validemail == false) {
 			error=true;
-			errMsg+="Please enter a Valid Username <br/>";
 		}else if (validpassword == false){
 			error=true;
-			errMsg+="Please enter a Valid Password <br/>";
 		}
 		
 		if(error){
 			response.sendRedirect("login.html");
 		}
 		
+		member mem=new member(email,password);
 		
+		memberDB db=new memberDB();
+		int success=db.verifyMember(mem);
 		
-		
-		
+		if (success == 2){
+			response.sendRedirect("../admin/dashboard.jsp");
+		} else if (success == 3) {
+			response.sendRedirect("../public/index.jsp");
+		} else if (success == 1){
+			
+		}
 		
 		
 		

@@ -42,36 +42,36 @@ public class memberDB {
 		}
 	}
 	
-	public boolean verifyMember(member mem){
+	public int verifyMember(member mem){
 		try{
 			Connection conn=connDB.getConnectionDB();
 			
-			String verifyadminsql="select * from admin where userid = ? and password = ? and ban=0";
-			String verifybanadminsql="select * from admin where userid = ? and password = ? and ban=1 ";
+			String verifyadminsql="select * from member where email = ? and password = ? and admin=1";
+			String verifybansql="select * from member where email = ? and password = ? and ban=1 ";
 			
 			PreparedStatement verifyadminpstmt=conn.prepareStatement(verifyadminsql);
-			PreparedStatement verifybanadminpstmt=conn.prepareStatement(verifybanadminsql);
+			PreparedStatement verifybanpstmt=conn.prepareStatement(verifybansql);
 			
-			verifyadminpstmt.setString(1, userid);
-			verifyadminpstmt.setString(2, password);
-			verifybanadminpstmt.setString(1, userid);
-			verifybanadminpstmt.setString(2, password);
+			verifyadminpstmt.setString(1, mem.getEmail());
+			verifyadminpstmt.setString(2, mem.getPassword());
+			verifybanpstmt.setString(1, mem.getEmail());
+			verifybanpstmt.setString(2, mem.getPassword());
 			
 			ResultSet verifyadminrs= verifyadminpstmt.executeQuery();
-			ResultSet verifybanadminrs= verifybanadminpstmt.executeQuery();
+			ResultSet verifybanrs= verifybanpstmt.executeQuery();
 			
-			if (verifybanadminrs.next() ) {
-   					out.println("Your Account has been suspended. Please Contact the Head Admin to verify.");
+			if (verifybanrs.next() ) {
+   					return 1;
+   					
    			} else if (verifyadminrs.next()){
-   					response.sendRedirect("../admin/dashboard.jsp");
-   				} else {
-   			
-   				response.sendRedirect("login.html");
-   				}
+   					return 2;
+   			} else {
+   					return 3;
+   			}
 			
 		} catch (Exception e){
 			System.out.println(e);
-			return false;
+			return 1;
 		}
 		
 		
