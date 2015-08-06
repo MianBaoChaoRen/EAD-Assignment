@@ -6,7 +6,7 @@
 	Class DISM/FT/2A/02
 	Marcus Tan 		- 1448892
 	Theodoric Lim 	- 1431223
-	William Tay 	- 1455656
+	William Tay 	- 1455656\
 
 
  -->
@@ -168,8 +168,7 @@
 					%> 
 					
 						<div class="col-sm-4 col-lg-4 col-md-4">
-						<form action = "AddCartServlet" method = "get">
-						<input type ="hidden" name = "productID" value = <%= productID %>>
+						
 							<div class="thumbnail">
 								<img src='<%= imagePath %>' alt="">
 									<div class="caption">
@@ -239,11 +238,14 @@
 					                			break;
 					                		}
 					                   		%>
+					                   	<form action = "AddCartServlet">
+											<input type ="hidden" name = "productID" value = <%= productID %>>
 					                 	<input type = "submit" value = "Add To Cart"/>
+					                 	</form>
 					                 	</p>
 					        	</div>
 				         	</div>
-				         	</form>
+				         	
 			         	</div>
 					<%
 							}

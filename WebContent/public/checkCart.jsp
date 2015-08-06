@@ -80,20 +80,19 @@
         </div>
         <!-- /.container -->
     </nav>
+    
+<h1>Shopping Cart</h1>
 
-    <!-- Page Content -->
-  <form action = "CheckCartServlet">
-	<h1>Shopping Cart</h1>
-    <div class="shopping-cart">
+<div class="shopping-cart">
 
-  	<div class="column-labels">
-	    <label class="product-image">Image</label>
-	    <label class="product-details">Product</label>
-	    <label class="product-price">Price</label>
-	    <label class="product-quantity">Quantity</label>
-	    <label class="product-removal">Remove</label>
-
- 	</div>
+  <div class="column-labels">
+    <label class="product-image">Image</label>
+    <label class="product-details">Product</label>
+    <label class="product-price">Price</label>
+    <label class="product-quantity">Quantity</label>
+    <label class="product-removal">Remove</label>
+    <label class="product-line-price">Total</label>
+  </div>
 <% 	
 	ArrayList<Cart> al = (ArrayList<Cart>)session.getAttribute("cart");
 	
@@ -103,56 +102,44 @@
 			c.setCount(i);
 			i++;
 %>
-	
   <div class="product">
     <div class="product-image">
-      <img src="<%= c.getImagePath()%>">
+      <img src="<%=c.getImagePath() %>">
     </div>
     <div class="product-details">
       <div class="product-title"><%=c.getShortDesc()%></div>
       <p class="product-description"><%=c.getDesc() %></p>
     </div>
-    <div class="product-price">
-    	<input type = "hidden" name = "price" id = "price" value = "<%= c.getPrice()%>">
-    	<%= c.getPrice() %>
-    </div>
+    <div class="product-price"></div>
     <div class="product-quantity">
-      <input type= "number" min="1" name = "Quantity" value="<%= c.getQuantity() %>">
+      <%=c.getQuantity() %>
     </div>
-    
-    <div class="product-removal">
-	    <form action = "RemoveCartServlet">
-		    <input type = "hidden" name = "arrayNo" value = "<%= c.getCount()%>">
-		      <button class="remove-product">
-		        Remove
-		      </button>
-	    </form>
 
-	    <form action = "ViewCartServlet">
-			<input type = "hidden" name = "productNo" value = "<%= c.getProductID()%>">
-		      <button class="remove-product">
-		        View
-		      </button>
-	    </form>
+    <div class="product-line-price"><%= c.getTotalPrice() %></div>
+  </div>
+     <%}
+} %>
+  <div class="totals">
+    <div class="totals-item">
+      <label>Subtotal</label>
+      <div class="totals-value" id="cart-subtotal">71.97</div>
+    </div>
+    <div class="totals-item">
+      <label>Tax (5%)</label>
+      <div class="totals-value" id="cart-tax">3.60</div>
+    </div>
+    <div class="totals-item">
+      <label>Shipping</label>
+      <div class="totals-value" id="cart-shipping">15.00</div>
+    </div>
+    <div class="totals-item totals-item-total">
+      <label>Grand Total</label>
+      <div class="totals-value" id="cart-total">90.57</div>
     </div>
   </div>
 
-<%}
-} %>
+      <button class="checkout">Buy Now</button>
 
-
-  	<button class="checkout">Checkout</button>
-  </form>
-    <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 </div>
 </body>
-
 </html>
-
-

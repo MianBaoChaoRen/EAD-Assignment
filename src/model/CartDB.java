@@ -3,30 +3,42 @@ import java.util.*;
 import java.sql.*;
 
 public class CartDB {
-	public ArrayList<Cart> addToCart(int id){
+	public ArrayList<Cart> addToCart(String id, ArrayList<Cart> al){
 		try{
 			Connection conn=connDB.getConnectionDB();
 			String sqlStr = "Select * from product where ProductID LIKE ?";
 			PreparedStatement pstmt = conn.prepareStatement(sqlStr);
-			pstmt.setInt(1, id);
-						
-			ArrayList<Cart> al = new ArrayList<Cart>();
-			ResultSet rs = pstmt.executeQuery(); 
+			pstmt.setString(1, id);
+
+			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				int productID = rs.getInt("ProductID");
 				String shortDesc = rs.getString("ShortDesc");
 				int price = rs.getInt("Price");
 				String imagePath = rs.getString("ImagePath");
-				Cart c = new Cart(productID, shortDesc, price, imagePath);
+				String desc = rs.getString("Desc");
+				Cart c = new Cart(productID, shortDesc, price, imagePath, desc, 0, 1, 0);
 				
 				al.add(c);
 			}
-			
+			conn.close();
+			return al;
 		}catch(Exception e){
 			System.out.println(e);
-			return null;
+			return null;			
 		}
-		return null;
+		
 	}
+	
+	public ArrayList<Cart> deleteFromCart(int itemID, ArrayList<Cart> al){
+		al.remove(itemID);
+		return al;
+	}
+	
+	public ArrayList<Cart> confirmCart(ArrayList<Cart> al, int quantity, int total){
+		
+		return al;
+	}
+	
 }
