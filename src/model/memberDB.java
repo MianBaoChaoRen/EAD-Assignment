@@ -46,32 +46,39 @@ public class memberDB {
 		try{
 			Connection conn=connDB.getConnectionDB();
 			
+			String verifymembersql="select * from member where email=? and password=?";
 			String verifyadminsql="select * from member where email = ? and password = ? and admin=1";
 			String verifybansql="select * from member where email = ? and password = ? and ban=1 ";
 			
+			PreparedStatement verifymemberpstmt=conn.prepareStatement(verifymembersql);
 			PreparedStatement verifyadminpstmt=conn.prepareStatement(verifyadminsql);
 			PreparedStatement verifybanpstmt=conn.prepareStatement(verifybansql);
 			
+			verifymemberpstmt.setString(1, mem.getEmail());
+			verifymemberpstmt.setString(2, mem.getPassword());
 			verifyadminpstmt.setString(1, mem.getEmail());
 			verifyadminpstmt.setString(2, mem.getPassword());
 			verifybanpstmt.setString(1, mem.getEmail());
 			verifybanpstmt.setString(2, mem.getPassword());
 			
+			ResultSet verifymemberrs= verifymemberpstmt.executeQuery();
 			ResultSet verifyadminrs= verifyadminpstmt.executeQuery();
 			ResultSet verifybanrs= verifybanpstmt.executeQuery();
 			
-			if (verifybanrs.next() ) {
-   					return 1;
-   					
-   			} else if (verifyadminrs.next()){
-   					return 2;
+			if (verifyadminrs.next() ) {
+   				return 1;
+   			} else if (verifymemberrs.next()){
+   				return 2;
+   			} else if (verifybanrs.next()){
+   				return 3;
    			} else {
-   					return 3;
+   				return 4;
    			}
+   				
 			
 		} catch (Exception e){
 			System.out.println(e);
-			return 1;
+			return 4;
 		}
 		
 		

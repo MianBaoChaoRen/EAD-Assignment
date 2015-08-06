@@ -108,12 +108,11 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-group"></i>
-                                <span> Administrators</span>
+                                <span> Members</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="viewallmembers.jsp"><i class="fa fa-angle-double-right"></i> View All Administrators</a></li>
-                                <li><a href="addadmin.jsp"><i class="fa fa-angle-double-right"></i> Add Administrator</a></li>
+                                <li><a href="viewalladmin.jsp"><i class="fa fa-angle-double-right"></i> View All Members</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -8,7 +8,29 @@ public class member {
 	private String address;
 	private String email;
 	private String password;
+	private int admin;
+	private int ban;
 	
+	public int getAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
+
+
+	public int getBan() {
+		return ban;
+	}
+
+
+	public void setBan(int ban) {
+		this.ban = ban;
+	}
+
+
 	public member() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -19,6 +41,21 @@ public class member {
 		super();
 		this.email = email;
 		this.password = password;
+	}
+
+
+	public member(int memberID, String name, String contact, String dob,
+			String address, String email, String password, int admin, int ban) {
+		super();
+		this.memberID = memberID;
+		this.name = name;
+		this.contact = contact;
+		this.dob = dob;
+		this.address = address;
+		this.email = email;
+		this.password = password;
+		this.admin = admin;
+		this.ban = ban;
 	}
 
 

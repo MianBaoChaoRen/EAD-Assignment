@@ -19,7 +19,7 @@
 <head>
 <link rel="icon" href="../ProductImg/SPFavicon.png" sizes="16x16">
         <meta charset="UTF-8">
-        <title>SP IT! TM | Administrators</title>
+        <title>SP IT! TM | Members</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -106,12 +106,11 @@
                         <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-group"></i>
-                                <span> Administrators</span>
+                                <span> Members</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="viewalladmin.jsp"><i class="fa fa-angle-double-right"></i> View All Administrators</a></li>
-                                <li><a href="addadmin.jsp"><i class="fa fa-angle-double-right"></i> Add Administrator</a></li>
+                                <li class="active"><a href="viewalladmin.jsp"><i class="fa fa-angle-double-right"></i> View All Members</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -124,12 +123,12 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Administrators
+                        Members
                         <small>Tables</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Administrators</li>
+                        <li class="active">Members</li>
                     </ol>
                 </section>
 
@@ -144,7 +143,7 @@
 	// Step 3 : Establish connection URL
 	Connection conn = DriverManager.getConnection(connURL);
 	Statement adminstmt= conn.createStatement();
-	ResultSet adminColrs = adminstmt.executeQuery("SELECT * FROM admin");
+	ResultSet adminColrs = adminstmt.executeQuery("SELECT * FROM member");
 	ResultSetMetaData adminColrsmd = adminColrs.getMetaData();
 %>
                 <!-- Main content -->
@@ -152,7 +151,7 @@
                 
                 <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Administrators Table</h3>                                    
+                                    <h3 class="box-title">Members Table</h3>                                    
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
                                     <table id="example1" class="table table-bordered table-striped">
@@ -164,35 +163,57 @@
 														
 													out.println(adminCol1);
 												%>
-                                                
-                                                
                                                 </th>
                                                 <th>
-                                                
                                                 <%
 														String adminCol2 = adminColrsmd.getColumnName(2);
 														
 														out.println(adminCol2);
 												%>
-                                                
                                                 </th>
                                                 <th>
-                                                
                                                 <%
 														String adminCol3 = adminColrsmd.getColumnName(3);
 														
 														out.println(adminCol3);
 												%>
-                                                
                                                 </th>
                                                 <th>
                                                 
+                                                <%
+														String adminCol4 = adminColrsmd.getColumnName(4);
+														
+														out.println(adminCol4);
+												%>
+                                                
+                                                </th>
+                                                <th>
                                                 <%
 														String adminCol5 = adminColrsmd.getColumnName(5);
 														
 														out.println(adminCol5);
 												%>
-                                                
+                                                </th>
+                                                <th>
+                                                <%
+														String adminCol6 = adminColrsmd.getColumnName(6);
+														
+														out.println(adminCol6);
+												%>
+                                                </th>
+                                                <th>
+                                                <%
+														String adminCol8 = adminColrsmd.getColumnName(8);
+														
+														out.println(adminCol8);
+												%>
+                                                </th>
+                                                <th>
+                                                <%
+														String adminCol9 = adminColrsmd.getColumnName(9);
+														
+														out.println(adminCol9);
+												%>
                                                 </th>
                                                 <th>
 												
@@ -208,15 +229,15 @@
                                         <tbody>
                                              
                                                 <%
-														String adminsql="select * from admin";
+														String adminsql="select * from member";
 														ResultSet adminrs= adminstmt.executeQuery(adminsql);
 														while (adminrs.next()){
-															int idadmin=adminrs.getInt("AdminID");
+															int idadmin=adminrs.getInt("memberID");
 												%>
 															<tr>
                                                 				<td>
 																	<%=
-																		adminrs.getString("AdminID") 
+																		adminrs.getString("memberID") 
 																	%> 
 																</td>
 																<td>
@@ -226,7 +247,27 @@
 																</td>
 																<td>
 																	<%=
-																		adminrs.getString("UserID") 
+																		adminrs.getString("contact") 
+																	%> 
+																</td>
+																<td>
+																	<%=
+																		adminrs.getString("dob") 
+																	%> 
+																</td>
+																<td>
+																	<%=
+																		adminrs.getString("address") 
+																	%> 
+																</td>
+																<td>
+																	<%=
+																		adminrs.getString("email") 
+																	%> 
+																</td>
+																<td>
+																	<%=
+																		adminrs.getString("admin") 
 																	%> 
 																</td>
 																<td>
@@ -261,11 +302,28 @@
 																		out.println("Ban Admin ?");
 																		out.println("</button>");
 														                out.println("</form>");
-													                } else {
+													                } else if (adminrs.getInt("ban") != 0) {
 													                	out.println("<form action=unbanadmin.jsp>");
 													                	out.println("<input type='hidden' name='unbanadmin' value='"+idadmin+"'/>");
 																		out.println("<button type='submit' class='viewallproducticon fa  fa-times' onclick='return Confirmclicked();'>");
 																		out.println("UnBan Admin ?");
+																		out.println("</button>");
+														                out.println("</form>");
+													                } 
+													                
+													                
+													                if (adminrs.getInt("admin") == 0) {
+													                	out.println("<form action=makeadmin.jsp>");
+													                	out.println("<input type='hidden' name='makeadmin' value='"+idadmin+"'/>");
+																		out.println("<button type='submit' class='viewallproducticon fa  fa-times' onclick='return Confirmclicked();'>");
+																		out.println("Make Admin ?");
+																		out.println("</button>");
+														                out.println("</form>");
+													                }  else if (adminrs.getInt("admin") == 1) {
+													                	out.println("<form action=unmakeadmin.jsp>");
+													                	out.println("<input type='hidden' name='unmakeadmin' value='"+idadmin+"'/>");
+																		out.println("<button type='submit' class='viewallproducticon fa  fa-times' onclick='return Confirmclicked();'>");
+																		out.println("Remove Admin Rights?");
 																		out.println("</button>");
 														                out.println("</form>");
 													                }

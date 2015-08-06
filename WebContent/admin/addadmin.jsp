@@ -18,7 +18,7 @@
 <head>
 <link rel="icon" href="../ProductImg/SPFavicon.png" sizes="16x16">
         <meta charset="UTF-8">
-        <title>SP IT! TM | ADD Administrator</title>
+        <title>SP IT! TM | ADD Member</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -97,12 +97,12 @@
                         <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-group"></i>
-                                <span> Administrators</span>
+                                <span> Members</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="viewalladmin.jsp"><i class="fa fa-angle-double-right"></i> View All Administrators</a></li>
-                                <li class="active"><a href="addadmin.jsp"><i class="fa fa-angle-double-right"></i> Add Administrator</a></li>
+                                <li><a href="viewalladmin.jsp"><i class="fa fa-angle-double-right"></i> View All Members</a></li>
+                                <li class="active"><a href="addadmin.jsp"><i class="fa fa-angle-double-right"></i> Add Member</a></li>
                             </ul>
                     </ul>
                 </section>
@@ -115,11 +115,11 @@
                 <section class="content-header">
                     <h1>
                         ADD
-                        <small>Administrator</small>
+                        <small>Member</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Add Administrator</li>
+                        <li class="active">Add Member</li>
                     </ol>
                 </section>
 
@@ -131,7 +131,7 @@
                             <!-- general form elements -->
                 			<div class="box box-primary">
                                 <div class="box-header">
-                                    <h3 class="box-title">Add Administrator Form</h3>
+                                    <h3 class="box-title">Add Member Form</h3>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
                                 <form role="form" action="verifyAddadministrator.jsp" method="post">

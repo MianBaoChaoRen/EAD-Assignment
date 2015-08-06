@@ -34,7 +34,7 @@
        			
        			String unbanadmin=request.getParameter("unbanadmin");
        			
-       			String unbanadminsql="UPDATE admin set ban=0 where AdminID=?";
+       			String unbanadminsql="UPDATE member set ban=0 where memberID=?";
        			
        			PreparedStatement unbanadminpstmt=conn.prepareStatement(unbanadminsql);
        			

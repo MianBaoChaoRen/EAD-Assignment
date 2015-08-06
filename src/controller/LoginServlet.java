@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.*;
 
@@ -70,12 +71,19 @@ public class LoginServlet extends HttpServlet {
 		memberDB db=new memberDB();
 		int success=db.verifyMember(mem);
 		
-		if (success == 2){
+		HttpSession session=request.getSession();
+		
+		if (success == 1){ 
+			session.setAttribute("email", email);
 			response.sendRedirect("../admin/dashboard.jsp");
-		} else if (success == 3) {
+		} else if (success == 2) {
+			session.setAttribute("email", email);
 			response.sendRedirect("../public/index.jsp");
-		} else if (success == 1){
-			
+		} else if (success == 3){
+			session.setAttribute("email", email);
+			response.sendRedirect("../login/ban.jsp");
+		} else if (success == 4){
+			response.sendRedirect("../login/login.html");
 		}
 		
 		

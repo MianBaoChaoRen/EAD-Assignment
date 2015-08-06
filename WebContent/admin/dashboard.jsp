@@ -11,7 +11,7 @@
 
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*,model.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,12 +48,15 @@
     </head>
     <body class="skin-blue">
     <%
-    	// Step1: Load JDBC Driver
-	Class.forName("com.mysql.jdbc.Driver");
-	// Step 2: Define Connection URL
-	String connURL ="jdbc:mysql://localhost/assignment_spit?user=root&password=1234";
-	// Step 3 : Establish connection URL
-	Connection conn = DriverManager.getConnection(connURL);	                            	
+    String email = (String) session.getAttribute("email");
+    
+	
+    if (email == null){
+    	response.sendRedirect("../login/login.html");
+    }
+    
+   	Connection conn=connDB.getConnectionDB();
+    
 	Statement stmt= conn.createStatement();
 	try{
 	%>
@@ -109,12 +112,11 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-group"></i>
-                                <span> Administrators</span>
+                                <span> Members</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="viewalladmin.jsp"><i class="fa fa-angle-double-right"></i> View All Administrators</a></li>
-                                <li><a href="addadmin.jsp"><i class="fa fa-angle-double-right"></i> Add Administrator</a></li>
+                                <li><a href="viewalladmin.jsp"><i class="fa fa-angle-double-right"></i> View All Members</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -179,7 +181,7 @@
                                     <h3>
                                         <%
                                         	
-                                        String CountAdminsql="select * from admin";
+                                        String CountAdminsql="select * from member";
                                     	ResultSet CounterAdminrs= stmt.executeQuery(CountAdminsql);
                                     	
 										int Membercounter = 0 ;
@@ -191,7 +193,7 @@
                                         %>
                                     </h3>
                                     <p>
-                                        Total Registered Admin
+                                        Total Registered Members
                                     </p>
                                 </div>
                                 <div class="icon">

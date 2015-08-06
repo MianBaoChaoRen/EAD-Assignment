@@ -32,19 +32,19 @@
        			// Step 3 : Establish connection URL
        			Connection conn = DriverManager.getConnection(connURL);
        			
-       			String deleteadmin=request.getParameter("deleteadmin");
+       			String unmakeadmin=request.getParameter("unmakeadmin");
        			
-       			String deleteadminsql="delete from member where memberID=?";
+       			String unmakeadminsql="UPDATE member set admin=0 where memberID=?";
        			
-       			PreparedStatement deleteadminpstmt=conn.prepareStatement(deleteadminsql);
+       			PreparedStatement unmakeadminpstmt=conn.prepareStatement(unmakeadminsql);
        			
-       			deleteadminpstmt.setInt(1,Integer.parseInt(deleteadmin));
+       			unmakeadminpstmt.setInt(1,Integer.parseInt(unmakeadmin));
        			
-       			int deleteadminrec=deleteadminpstmt.executeUpdate();
+       			int unmakeadminrec=unmakeadminpstmt.executeUpdate();
        			
-       			out.println(deleteadminrec+ " record(s) deleted");
+       			out.println(unmakeadminrec+ " record(s) deleted");
        			
-       			if (deleteadminrec == 1) {
+       			if (unmakeadminrec == 1) {
        				response.sendRedirect("viewalladmin.jsp");
        			} else {
        				
