@@ -37,9 +37,28 @@ public class member {
 	}
 	
 	
+	public member(String email) {
+		super();
+		this.email = email;
+	}
+
+
 	public member(String email, String password) {
 		super();
 		this.email = email;
+		this.password = password;
+	}
+	
+	
+
+
+	public member(int memberID, String name, String contact, String address,
+			String password) {
+		super();
+		this.memberID = memberID;
+		this.name = name;
+		this.contact = contact;
+		this.address = address;
 		this.password = password;
 	}
 

@@ -84,6 +84,35 @@ public class memberDB {
 		
 		
 	}
+	
+	public boolean updatemember(member mem){
+		try{
+			Connection conn=connDB.getConnectionDB();
+   			
+			String updatemembersql="update member SET name=?, contact=?, address=?, password=?where memberID=?";
+			
+			PreparedStatement updatememberpstmt=conn.prepareStatement(updatemembersql);
+   			
+   			updatememberpstmt.setString(1, mem.getName());
+   			updatememberpstmt.setString(2, mem.getContact());
+   			updatememberpstmt.setString(3, mem.getAddress());
+   			updatememberpstmt.setString(4, mem.getPassword());
+   			updatememberpstmt.setInt(5, mem.getMemberID());
+			
+   			int updatememberrec=updatememberpstmt.executeUpdate();
+   			
+   			if (updatememberrec ==1){
+   				return true;
+   			} else {
+   				return false;
+   			}
+			
+		} catch (Exception e){
+			System.out.println(e);
+			return false;
+		}
+		
+	}
 }
 
 

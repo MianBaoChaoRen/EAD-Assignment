@@ -79,6 +79,9 @@
                         Welcome
                     </li>
                     <li>
+                        <a href="../public/memberprofile.jsp">Profile</a>
+                    </li>
+                    <li>
                         <a href="#">About</a>
                     </li>
                     <li>
