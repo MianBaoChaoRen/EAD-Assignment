@@ -91,6 +91,9 @@ public class Cart {
 		this.count = count;
 	}
 
+
+
+
 	public Cart(int productID, String shortDesc, int price, String imagePath,
 			String desc, int count, int quantity, int totalPrice) {
 		super();
@@ -104,6 +107,7 @@ public class Cart {
 		this.totalPrice = totalPrice;
 	}
 
+	
 	
 	
 }

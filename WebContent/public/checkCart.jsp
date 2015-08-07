@@ -90,18 +90,23 @@
     <label class="product-details">Product</label>
     <label class="product-price">Price</label>
     <label class="product-quantity">Quantity</label>
-    <label class="product-removal">Remove</label>
+    <label class="product-filler"></label>
     <label class="product-line-price">Total</label>
   </div>
 <% 	
 	ArrayList<Cart> al = (ArrayList<Cart>)session.getAttribute("cart");
-	
+    
+    int totals = 0;
     if( al != null){
     	int i = 0;
+    	
 		for (Cart c: al){
 			c.setCount(i);
 			i++;
 %>
+	<form action="UpdateCartServlet" id="uForm">
+	</form>
+	
   <div class="product">
     <div class="product-image">
       <img src="<%=c.getImagePath() %>">
@@ -110,19 +115,22 @@
       <div class="product-title"><%=c.getShortDesc()%></div>
       <p class="product-description"><%=c.getDesc() %></p>
     </div>
-    <div class="product-price"></div>
+    <div class="product-price"><%= c.getPrice() %></div>
     <div class="product-quantity">
       <%=c.getQuantity() %>
     </div>
 
     <div class="product-line-price"><%= c.getTotalPrice() %></div>
   </div>
-     <%}
+     <%
+    
+    totals+= c.getTotalPrice();
+	}
 } %>
   <div class="totals">
     <div class="totals-item">
       <label>Subtotal</label>
-      <div class="totals-value" id="cart-subtotal">71.97</div>
+      <div class="totals-value" id="cart-subtotal"><%=totals%></div>
     </div>
     <div class="totals-item">
       <label>Tax (5%)</label>
@@ -138,7 +146,7 @@
     </div>
   </div>
 
-      <button class="checkout">Buy Now</button>
+       <button class="checkout">Buy Now</button><button class = "back" form = "uForm">Back</button>
 
 </div>
 </body>

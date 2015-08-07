@@ -1,8 +1,6 @@
 package controller;
-import model.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -16,16 +14,16 @@ import model.Cart;
 import model.CartDB;
 
 /**
- * Servlet implementation class RemoveCartServlet
+ * Servlet implementation class UpdateCartServlet
  */
-@WebServlet("/public/RemoveCartServlet")
-public class RemoveCartServlet extends HttpServlet {
+@WebServlet("/public/UpdateCartServlet")
+public class UpdateCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveCartServlet() {
+    public UpdateCartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +33,11 @@ public class RemoveCartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int num = Integer.parseInt(request.getParameter("arrayNo"));
 		HttpSession session = request.getSession();	
-		CartDB db = new CartDB();
 		
 		ArrayList<Cart> al = (ArrayList<Cart>)session.getAttribute("cart");
-		al.remove(num);
 
-       	session.setAttribute("cart", al);
+		session.setAttribute("cart", al);	
 		response.sendRedirect("displayCart.jsp");
 	}
 

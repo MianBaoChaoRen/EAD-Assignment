@@ -249,7 +249,7 @@
 					                   		%>
 					                   	<form action = "AddCartServlet">
 											<input type ="hidden" name = "productID" value = <%= productID %>>
-					                 	<input type = "submit" value = "Add To Cart"/>
+					                 		<input type = "submit" value = "Add To Cart"/>
 					                 	</form>
 					                 	</p>
 					        	</div>

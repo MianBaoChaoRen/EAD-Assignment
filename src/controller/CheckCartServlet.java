@@ -19,43 +19,34 @@ import model.CartDB;
 @WebServlet("/public/CheckCartServlet")
 public class CheckCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CheckCartServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int quantity = Integer.parseInt(request.getParameter("Quantity"));
-		int price = Integer.parseInt(request.getParameter("price"));
-		int total = price * quantity;
-
-		HttpSession session = request.getSession();	
-		CartDB db = new CartDB();
-		
-		ArrayList<Cart> al = (ArrayList<Cart>)session.getAttribute("cart");
-		al = db.confirmCart(al, quantity, total);
-		
-		if(al == null){
-			
-		}
-		
-       	session.setAttribute("cart", al);
-		response.sendRedirect("checkCart.jsp");
-		
+	public CheckCartServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		ArrayList<Cart> al = (ArrayList<Cart>)session.getAttribute("cart");
+		session.setAttribute("concart", al);
+		response.sendRedirect("checkCart.jsp");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
