@@ -42,19 +42,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-			<script type="text/javascript">		
-			 function autoClick () {
-				    document.forms["dForm"].submit();
-				   }
-			 window.onclick = document.getElementById("confirm");
-			</script>
 
 </head>
 
 <body>
-
-
-	
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -82,93 +73,99 @@
 		</div>
 		<!-- /.container -->
 	</nav>
-<h1>Shopping Cart</h1>
-	<!-- Page Content -->
-	<div class="shopping-cart">
-		
 
+	<h1>Summary</h1>
+
+	<div class="shopping-cart">
 
 		<div class="column-labels">
-			<label class="product-image">Image</label> 
-			<label class="product-details">Product</label> 
-			<label class="product-price">Price</label>
-			<label class="product-quantity">Quantity</label> 
-			<label class="product-removal">Remove</label>
-
-		</div>		
+			<label class="product-image">Image</label> <label
+				class="product-details">Product</label> <label class="product-price">Price</label>
+			<label class="product-quantity">Quantity</label> <label
+				class="product-line-price">Total</label>
+		</div>
 		<%
 			ArrayList<Cart> al = (ArrayList<Cart>) session.getAttribute("cart");
-			
+			String[] userdetails = (String[]) session
+					.getAttribute("userdetails");
+			int subtotals = 0;
+			int tax = 0;
+			int shipping = 0;
+			int totals = 0;
 			if (al != null) {
-				for(Cart c: al){
-					%>
-					<form action="ViewCartServlet" id="vForm">
-					<input type="hidden" name="productNo" value="<%=c.getProductID()%>">
-					</form>
-					
-					<form action="RemoveCartServlet" id="rForm">
-						<input type="hidden" name="arrayNo" value="<%=c.getCount()%>">
-					</form>
-					<%
-				}
-				
-				
-			%><form action = "DetailsCartServlet" id = "dForm"><%
 				int i = 0;
+
 				for (Cart c : al) {
 					c.setCount(i);
-					
+					i++;
 		%>
+		<form action="UpdateCartServlet" id="uForm"></form>
 
-			
-			
-			<div class="product">
-		
-				<div class="product-image">
-					<img src="<%=c.getImagePath()%>">
-				</div>
-
-				<div class="product-details">
-					<div class="product-title"><%=c.getShortDesc()%></div>
-					<p class="product-description"><%=c.getDesc()%></p>
-				</div>
-
-				<div class="product-price">
-					<input type="hidden" name="price<%=i%>" id="price" value="<%=c.getPrice()%>">
-					<%=c.getPrice()%>
-				</div>
-
-				<div class="product-quantity">
-					<input type="number" min="1" name="quantity<%=i%>" id="quantity" value="<%=c.getQuantity()%>">
-				</div>
-
-				<div class="product-removal">
-					<button class="remove-product" form="rForm">Remove</button>
-
-					<button class="remove-product" form="vForm">View</button>
-				</div>
+		<div class="product">
+			<div class="product-image"></div>
+			<div class="product-details2">
+				<div class="product-title"><%=c.getShortDesc()%></div>
+				<p class="product-description"></p>
 			</div>
-			<%
-			i++;
-			}			
-			%>
-			</form>				
-			<button type="submit" class="checkout" form = "dForm">Checkout</button>
-			
+			<div class="product-price"><%=c.getPrice()%></div>
+			<div class="product-quantity"><%=c.getQuantity()%></div>
+
+			<div class="product-line-price"><%=c.getTotalPrice()%></div>
+		</div>
 		<%
+			subtotals += c.getTotalPrice();
+				}
+				tax = (int) (subtotals * (5.0f / 100.0f));
+				shipping = (int) (subtotals * (2.0f / 100.0f));
+				totals = subtotals + tax + shipping;
 			}
 		%>
+		<div class="totals">
+			<div class="totals-item">
+				<label>Subtotal</label>
+				<div class="totals-value" id="cart-subtotal"><%=subtotals%></div>
+			</div>
+			<div class="totals-item">
+				<label>Tax (5%)</label>
+				<div class="totals-value" id="cart-tax"><%=tax%></div>
+			</div>
+			<div class="totals-item">
+				<label>Shipping</label>
+				<div class="totals-value" id="cart-shipping"><%=shipping%></div>
+			</div>
+			<div class="totals-item totals-item-total">
+				<label>Grand Total</label>
+				<div class="totals-value" id="cart-total"><%=totals%></div>
+			</div>
+
+
+
+			<div class="totals-item2">
+				<label>Name</label>
+				<div class="totals-value2">
+					<%=userdetails[0] %>
+				</div>
+			</div>
+			<div class="totals-item2">
+				<label>Contact</label>
+				<div class="totals-value2">
+					<%=userdetails[1] %>
+				</div>
+			</div>
+			<div class="totals-item2">
+				<label>Email</label>
+				<div class="totals-value2">
+					<%=userdetails[2] %>
+				</div>
+			</div>
+			<div class="totals-item2">
+				<label>Mailing Address</label>
+				<div class="totals-value2">
+					<%=userdetails[3] %>
+				</div>
+			</div>
+		</div>
+
 	</div>
-	<!-- /.container -->
-
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-
 </body>
-
 </html>
-
-

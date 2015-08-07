@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,20 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Cart;
-import model.CartDB;
+import model.*;
 
 /**
- * Servlet implementation class DetailsCartServlet
+ * Servlet implementation class BuyCartServlet
  */
-@WebServlet("/public/DetailsCartServlet")
-public class DetailsCartServlet extends HttpServlet {
+@WebServlet("/public/BuyCartServlet")
+public class BuyCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailsCartServlet() {
+    public BuyCartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +33,25 @@ public class DetailsCartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		HttpSession session = request.getSession();
 		CartDB db = new CartDB();
-		ArrayList<Cart> al = (ArrayList<Cart>) session.getAttribute("cart");
-		int i = 0;
-		for(i = 0; i < al.size(); i++){
-			int quantity = Integer.parseInt(request.getParameter("quantity"+i));
-			if(quantity == 0){
-				quantity = 1;
-			}
-			int price = Integer.parseInt(request.getParameter("price"+i));
-			int total = (price * quantity);
-			
-			ArrayList<Cart> d = db.confirmCart(al, quantity, total, i);
-			session.setAttribute("cart", d);
+		
+		String name = request.getParameter("name");
+		String contact = request.getParameter("contact");
+		String email = request.getParameter("email");
+		String address = request.getParameter("address");
+		String creditcard = request.getParameter("creditcard");
+		String cardtype = request.getParameter("cardtype");
+		String exmonth = request.getParameter("month");
+		String exyear = request.getParameter("year");
+		String cvc = request.getParameter("cvc");
 
-		}
-		
-		
-		response.sendRedirect("checkCart.jsp");
-		
+		String [] userDetails = {name, contact, email, address};
+		ArrayList<Cart> al = (ArrayList<Cart>)session.getAttribute("cart");
+		db.recordCart(name, contact, email, address, creditcard, cardtype, exmonth, exyear, cvc, al);
+
+		session.setAttribute("userdetails", userDetails);
+		response.sendRedirect("summaryCart.jsp");
 	}
 
 	/**
@@ -61,7 +59,6 @@ public class DetailsCartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 	}
 
 }

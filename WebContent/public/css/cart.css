@@ -15,6 +15,11 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
   width: 37%;
 }
 
+.product-details2 {
+  float: left;
+  width: 68%;
+}
+
 .product-price {
   float: left;
   width: 12%;
@@ -30,10 +35,6 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
   width: 9%;
 }
 
-.product-filler{
-	float: left;
-	width: 0px;
-}
 
 /* This is used as the traditional .clearfix class */
 .group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before,
@@ -69,7 +70,6 @@ body {
 
 h1 {
   font-weight: 100;
-
 }
 
 label {
@@ -130,13 +130,39 @@ label {
 .totals .totals-item {
   float: right;
   clear: both;
-  width: 100%;
+  width: 30%;
   margin-bottom: 10px;
 }
 .totals .totals-item label {
-  float: left;
+  float: right;
   clear: both;
   width: 79%;
+  text-align: right;
+}
+
+.totals2 .totals-item2 {
+  float: right;
+  clear: both;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.totals2 .totals-item2 label {
+  float: left;
+  clear: both;
+  width: 59%;
+  text-align: right;
+}
+
+.totals3 .totals-item3{
+  float: left;
+  clear: both;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.totals3 .totals-item3 label {
+  float: left;
+  clear: both;
+  width: 59%;
   text-align: right;
 }
 .totals .totals-item .totals-value {
@@ -144,6 +170,7 @@ label {
   width: 21%;
   text-align: right;
 }
+
 .totals .totals-item-total {
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
 }
@@ -160,9 +187,10 @@ label {
 }
 
 .back {
-  float: left;
+  float: right;
   border: 0;
   margin-top: 27px;
+  margin-right: 80px;
   padding: 6px 25px;
   background-color: black;
   color: #fff;
@@ -241,7 +269,7 @@ label {
   .product .product-line-price:before {
     content: 'Item Total: $';
   }
-
+ 
   .totals .totals-item label {
     width: 60%;
   }
