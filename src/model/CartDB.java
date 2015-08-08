@@ -49,47 +49,69 @@ public class CartDB {
 		return al;
 	}
 	
-	public boolean recordCart(String name, String contact, String email,  String address, String creditcard,
+	public int recordCart(String name, String contact, String email,  String address, String creditcard,
 				String cardtype, String exmonth, String exyear, String cvc, ArrayList<Cart> Al){
 		try{
 			Connection conn = connDB.getConnectionDB();
 			ArrayList<Cart> al = Al;
-			int i = 0;
-			
-			for(i = 0; i < al.size(); i++){
-				Cart c = al.get(i);
-				String sql = "insert into ordercart (memberID, mailingaddress, email, contact, creditcard, exmonth, exyear, cvc, name, cardtype, productID, quantity, totalprice)" + 
-						" Values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-		
-				pstmt.setInt(1, i);
-				pstmt.setString(2, address);
-				pstmt.setString(3, email);
-				pstmt.setString(4, contact);
-				pstmt.setString(5, creditcard);
-				pstmt.setString(6, exmonth);
-				pstmt.setString(7, exyear);
-				pstmt.setString(8, cvc);
-				pstmt.setString(9, name);
-				pstmt.setString(10, cardtype);
-				pstmt.setInt(11, c.getProductID());
-				pstmt.setInt(12, c.getQuantity());
-				pstmt.setInt(13, c.getTotalPrice());
+				int orderID = 0;
+				int memberID = 0;
+				String orderid = "select orderid from ordercart";
 				
-				int success = pstmt.executeUpdate();
-				if(success == 0){
-					return false;
-				}else
-					return true;
+				String memberid = "select memberID from member where email = ?";
 				
-			}
-			conn.close();
-			return false;
+				String sql = "insert into ordercart (orderid, memberid, name, contact, email, address, creditcard, cardtype, exmonth, exyear, cvc, productID, quantity, totalprice)" + 
+						" Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				
+				
+				
+				PreparedStatement pstmt = conn.prepareStatement(orderid);
+				PreparedStatement pstmt2 = conn.prepareStatement(sql);
+				PreparedStatement pstmt3 = conn.prepareStatement(memberid);
+				
+				pstmt3.setString(1, email);
+				
+				ResultSet rs = pstmt.executeQuery();
+				ResultSet rs2 = pstmt3.executeQuery();
+				
+				while(rs.next()){
+					orderID = rs.getInt("orderid");
+				}
+				
+					if(orderID == 0){
+						orderID = 1;
+					}else{
+						orderID++;
+					}
+				
+				while(rs2.next()){
+					memberID = rs2.getInt("memberID");
+				}
 			
+				pstmt2.setInt(1, orderID);	
+				pstmt2.setInt(2, memberID);				
+				for(Cart c: al){
+					
+					pstmt2.setString(3, name);
+					pstmt2.setString(4, contact);
+					pstmt2.setString(5, email);
+					pstmt2.setString(6, address);
+					pstmt2.setString(7, creditcard);
+					pstmt2.setString(8, cardtype);
+					pstmt2.setString(9, exmonth);
+					pstmt2.setString(10, exyear);
+					pstmt2.setString(11, cvc);
+					pstmt2.setInt(12, c.getProductID());
+					pstmt2.setInt(13, c.getQuantity());
+					pstmt2.setInt(14, c.getTotalPrice());
+					
+					pstmt2.executeUpdate();
+				}	
+				return orderID;
+
 		}catch (Exception e) {
 			System.out.println(e);
-			return false;
+			return 0;
 		}
 	}
 }
