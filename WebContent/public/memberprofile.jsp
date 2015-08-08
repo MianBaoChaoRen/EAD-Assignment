@@ -114,6 +114,7 @@
 			
 			<%
 				String updateprofilesql="select * from member where email = '"+email+"'";
+            		
 				ResultSet profilers= stmt.executeQuery(updateprofilesql);
 			%>
 			<!-- general form elements -->
