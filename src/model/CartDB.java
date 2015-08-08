@@ -55,8 +55,9 @@ public class CartDB {
 			Connection conn = connDB.getConnectionDB();
 			ArrayList<Cart> al = Al;
 			int i = 0;
-			for(Cart c: al){
-				
+			
+			for(i = 0; i < al.size(); i++){
+				Cart c = al.get(i);
 				String sql = "insert into ordercart (memberID, mailingaddress, email, contact, creditcard, exmonth, exyear, cvc, name, cardtype, productID, quantity, totalprice)" + 
 						" Values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
@@ -77,7 +78,6 @@ public class CartDB {
 				pstmt.setInt(13, c.getTotalPrice());
 				
 				int success = pstmt.executeUpdate();
-				i++;
 				if(success == 0){
 					return false;
 				}else
