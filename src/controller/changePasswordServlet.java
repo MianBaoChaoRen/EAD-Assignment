@@ -40,7 +40,7 @@ public class changePasswordServlet extends HttpServlet {
 
 	    Connection con =   GetConnectToDb();
 	    boolean flag = CheckLogin(Password,CPassword,Email,con);
-	    if(flag==true){
+	    if(flag){
 	        gotoPage("/LoginPage.jsp",request,response);
 	    }
 	    else{
