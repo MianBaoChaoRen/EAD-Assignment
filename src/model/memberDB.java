@@ -113,6 +113,31 @@ public class memberDB {
 		}
 		
 	}
+	
+	public String getname(String email){
+		try{
+			Connection conn=connDB.getConnectionDB();
+			
+			String name = null;
+			
+			String getname = "Select * from member where email = ?";
+			
+			PreparedStatement getnamepstmt = conn.prepareStatement(getname);
+			
+			getnamepstmt.setString(1, email);
+			
+			ResultSet rs = getnamepstmt.executeQuery();
+			
+			while(rs.next()){
+				name = rs.getString("name");
+			}
+			
+			return name;
+		}catch(Exception e){
+			System.out.println(e);
+			return null;
+		}
+	}
 }
 
 
