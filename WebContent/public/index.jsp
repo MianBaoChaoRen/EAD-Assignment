@@ -50,6 +50,7 @@
 	
 	
     String email = (String) session.getAttribute("email");
+    String name = (String) session.getAttribute("name");
     
     try{
 	
@@ -76,7 +77,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        Welcome
+                        <a href="#">Welcome <%=name %></a>
                     </li>
                     <li>
                         <a href="../public/memberprofile.jsp">Profile</a>

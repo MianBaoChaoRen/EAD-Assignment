@@ -46,6 +46,9 @@
 </head>
 
 <body>
+	<%
+		String name = (String) session.getAttribute("name"); 	
+	%>
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -60,15 +63,25 @@
 				<a class="navbar-brand" href="index.jsp">SP IT! TM</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="../login/login.html">Login</a></li>
-					<li><a href="../login/register.html">Register</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">Welcome <%=name %></a>
+                    </li>
+                    <li>
+                        <a href="../public/memberprofile.jsp">Profile</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <li>
+                        <a href="../login/logout.jsp">Logout</a>
+                    </li>
+                </ul>
+            </div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container -->

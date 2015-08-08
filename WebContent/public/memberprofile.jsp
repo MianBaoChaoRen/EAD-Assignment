@@ -47,8 +47,8 @@
 	Connection conn=connDB.getConnectionDB();
     
 	Statement stmt= conn.createStatement();
-	
-	
+
+	String name2 = (String) session.getAttribute("name");
     String email = (String) session.getAttribute("email");
     
     try{
@@ -78,7 +78,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        Welcome
+                        <a href="#">Welcome <%=name2 %></a>
                     </li>
                     <li>
                         <a href="../public/memberprofile.jsp">Profile</a>
