@@ -73,8 +73,9 @@
 		</div>
 		<!-- /.container -->
 	</nav>
-
+	<%String orderid = String.valueOf(session.getAttribute("orderid"));%>
 	<h1>Summary</h1>
+	<h2>Transaction <%=orderid %></h2>
 
 	<div class="shopping-cart">
 
@@ -86,8 +87,9 @@
 		</div>
 		<%
 			ArrayList<Cart> al = (ArrayList<Cart>) session.getAttribute("cart");
-			String[] userdetails = (String[]) session
-					.getAttribute("userdetails");
+			String[] userdetails = (String[]) session.getAttribute("userdetails");
+			
+					
 			int subtotals = 0;
 			int tax = 0;
 			int shipping = 0;

@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -35,7 +34,8 @@ public class BuyCartServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		CartDB db = new CartDB();
-		
+		ArrayList<Cart> al = (ArrayList<Cart>) session.getAttribute("cart");
+				
 		String name = request.getParameter("name");
 		String contact = request.getParameter("contact");
 		String email = request.getParameter("email");
@@ -47,9 +47,11 @@ public class BuyCartServlet extends HttpServlet {
 		String cvc = request.getParameter("cvc");
 
 		String [] userDetails = {name, contact, email, address};
-		ArrayList<Cart> al = (ArrayList<Cart>)session.getAttribute("cart");
-		db.recordCart(name, contact, email, address, creditcard, cardtype, exmonth, exyear, cvc, al);
 
+		
+		String orderid = String.valueOf(db.recordCart(name, contact, email, address, creditcard, cardtype, exmonth, exyear, cvc, al));
+		System.out.println(orderid);
+		session.setAttribute("orderid", orderid);
 		session.setAttribute("userdetails", userDetails);
 		response.sendRedirect("summaryCart.jsp");
 	}
