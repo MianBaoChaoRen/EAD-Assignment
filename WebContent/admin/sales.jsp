@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>SP IT! TM | Dashboard</title>
+        <title>SP IT! TM | Sales</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="../admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -81,19 +81,19 @@
                 <section class="sidebar">
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="active">
+                        <li>
                             <a href="dashboard.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-folder"></i>
                                 <span>Sales Report</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                           	<ul class="treeview-menu">
-                                <li><a href="sales.jsp"><i class="fa fa-angle-double-right"></i> Month</a></li>
+                                <li class="active"><a href="sales.jsp"><i class="fa fa-angle-double-right"></i> Month</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -133,128 +133,87 @@
                 </section>
                 <!-- /.sidebar -->
             </aside>
-
+            
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">                
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
-                        <small>Control panel</small>
+                        Sales
+                        <small>Report</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="dashboard.jsp"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Dashboard</li>
+                        <li class="active">Sales</li>
                     </ol>
                 </section>
 
                 <!-- Main content -->
                 <section class="content">
 				
-				<!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-maroon">
-                                <div class="inner">
-                                    <h3>
-                                        <% 
-                                        	String CountProductsql="SELECT * FROM product";
-                                        	ResultSet CountProductrs= stmt.executeQuery(CountProductsql);
-                                        	
-                                        	int Productcounter = 0 ;
-                                        	
-                                        	while (CountProductrs.next()){
-                                        		++Productcounter;
-                                        	} out.println(Productcounter);
-                                        
-                                        %>
-                                        
-                                    </h3>
-                                    <p>
-                                        Products
-                                    </p>
+					<section class="col-lg-6 connectedSortable">
+							<!-- Custom tabs (Charts with tabs)-->
+                            <div class="nav-tabs-custom">
+                                <!-- Tabs within a box -->
+                                	<ul class="nav nav-tabs pull-right">
+	                                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Month</a></li>
+	                                    <li class="pull-left header"><i class="fa fa-inbox"></i>Top 10 Sales</li>
+	                                </ul>
+                                <div class="tab-content no-padding">
+                                    <table class="table table-striped">
+                                            <tr>
+                                                <th>Top</th>
+                                                <th>Visitors</th>
+                                                <th>Online</th>
+                                                <th>Page Views</th>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">1</a></td>
+                                                <td><div id="sparkline-1"></div></td>
+                                                <td>209</td>
+                                                <td>239</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2</a></td>
+                                                <td><div id="sparkline-2"></div></td>
+                                                <td>131</td>
+                                                <td>958</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">3</a></td>
+                                                <td><div id="sparkline-3"></div></td>
+                                                <td>19</td>
+                                                <td>417</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">4</a></td>
+                                                <td><div id="sparkline-4"></div></td>
+                                                <td>109</td>
+                                                <td>476</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">5</a></td>
+                                                <td><div id="sparkline-5"></div></td>
+                                                <td>192</td>
+                                                <td>437</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">6</a></td>
+                                                <td><div id="sparkline-6"></div></td>
+                                                <td>1709</td>
+                                                <td>947</td>
+                                            </tr>
+                                        </table><!-- /.table -->
                                 </div>
-                                <div class="icon">
-                                    <i class="ion ion-ios7-pricetag-outline"></i>
-                                </div>
-                                <a href="viewallproduct.jsp" class="small-box-footer">
-                                    View All <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-yellow">
-                                <div class="inner">
-                                    <h3>
-                                        <%
-                                        	
-                                        String CountAdminsql="select * from member";
-                                    	ResultSet CounterAdminrs= stmt.executeQuery(CountAdminsql);
-                                    	
-										int Membercounter = 0 ;
-                                    	
-                                    	while (CounterAdminrs.next()){
-                                    		++Membercounter;
-                                    	} out.println(Membercounter);
-                                        
-                                        %>
-                                    </h3>
-                                    <p>
-                                        Total Registered Members
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                                <a href="viewalladmin.jsp" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                        
-                        
-                	</div>
-                	
-                	<div class="row">
-						<div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-purple">
-                                <div class="inner">
-                                    <h3>
-                                        <%
-                                        	
-                                        String CountReviewsql="select * from review where Approved = 0";
-                                    	ResultSet CounterReviewrs= stmt.executeQuery(CountReviewsql);
-                                    	
-										int Reviewcounter = 0 ;
-                                    	
-                                    	while (CounterReviewrs.next()){
-                                    		++Reviewcounter;
-                                    	} out.println(Reviewcounter);
-                                        
-                                        %>
-                                    </h3>
-                                    <p>
-                                        Un-Approved Reviews
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-ios7-briefcase-outline"></i>
-                                </div>
-                                <a href="unapprovedreview.jsp" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                    </div><!-- /.row (main row) -->
-
+                            </div><!-- /.nav-tabs-custom -->
+                            
+                        </section><!-- right col -->
+				
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
-<%																	
+            
+ <%																	
 	conn.close();
 	} catch(Exception e){
 	out.println(e);
