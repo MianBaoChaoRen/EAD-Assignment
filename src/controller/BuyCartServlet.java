@@ -50,7 +50,6 @@ public class BuyCartServlet extends HttpServlet {
 
 		
 		String orderid = String.valueOf(db.recordCart(name, contact, email, address, creditcard, cardtype, exmonth, exyear, cvc, al));
-		System.out.println(orderid);
 		session.setAttribute("orderid", orderid);
 		session.setAttribute("userdetails", userDetails);
 		response.sendRedirect("summaryCart.jsp");
