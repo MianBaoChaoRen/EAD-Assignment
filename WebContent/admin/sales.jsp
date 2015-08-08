@@ -34,7 +34,14 @@
         <!-- AdminLTE App -->
         <script src="../admin/js/AdminLTE/app.js" type="text/javascript"></script>
 
-
+        <!-- daterange picker -->
+        <link href="../admin/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+        <!-- iCheck for checkboxes and radio inputs -->
+        <link href="../admin/css/iCheck/all.css" rel="stylesheet" type="text/css" />
+        <!-- Bootstrap Color Picker -->
+        <link href="../admin/css/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet"/>
+        <!-- Bootstrap time Picker -->
+        <link href="../admin/css/timepicker/bootstrap-timepicker.min.css" rel="stylesheet"/>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -148,68 +155,121 @@
                     </ol>
                 </section>
 
-                <!-- Main content -->
+                 <!-- Main content -->
                 <section class="content">
-				
-					<section class="col-lg-6 connectedSortable">
-							<!-- Custom tabs (Charts with tabs)-->
-                            <div class="nav-tabs-custom">
-                                <!-- Tabs within a box -->
-                                	<ul class="nav nav-tabs pull-right">
-	                                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Month</a></li>
-	                                    <li class="pull-left header"><i class="fa fa-inbox"></i>Top 10 Sales</li>
-	                                </ul>
-                                <div class="tab-content no-padding">
-                                    <table class="table table-striped">
-                                            <tr>
-                                                <th>Top</th>
-                                                <th>Visitors</th>
-                                                <th>Online</th>
-                                                <th>Page Views</th>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">1</a></td>
-                                                <td><div id="sparkline-1"></div></td>
-                                                <td>209</td>
-                                                <td>239</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">2</a></td>
-                                                <td><div id="sparkline-2"></div></td>
-                                                <td>131</td>
-                                                <td>958</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">3</a></td>
-                                                <td><div id="sparkline-3"></div></td>
-                                                <td>19</td>
-                                                <td>417</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">4</a></td>
-                                                <td><div id="sparkline-4"></div></td>
-                                                <td>109</td>
-                                                <td>476</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">5</a></td>
-                                                <td><div id="sparkline-5"></div></td>
-                                                <td>192</td>
-                                                <td>437</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">6</a></td>
-                                                <td><div id="sparkline-6"></div></td>
-                                                <td>1709</td>
-                                                <td>947</td>
-                                            </tr>
-                                        </table><!-- /.table -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h3 class="box-title">Select Date</h3>
                                 </div>
-                            </div><!-- /.nav-tabs-custom -->
-                            
-                        </section><!-- right col -->
-				
+                                <div class="box-body">
+                                    <!-- Date range -->
+                                    
+                                    <form action="salesServlet" method="post">
+                                    
+                                    <div class="form-group">
+                                        <label>Date range:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="reservation" name="daterange"/>
+                                        </div><!-- /.input group -->
+                                    </div><!-- /.form group -->
+                                    
+                                    <input type="submit" name="submit" class="btn btn-primary" value="Submit"/>
+                                    
+                                    </form>
+                                    
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                        </div><!-- /.col (right) -->
+                    </div><!-- /.row -->                    
+
                 </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+
+
+        <!-- jQuery 2.0.2 -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../admin/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- InputMask -->
+        <script src="../admin/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+        <script src="../admin/js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+        <script src="../admin/js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+        <!-- date-range-picker -->
+        <script src="../admin/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <!-- bootstrap color picker -->
+        <script src="../admin/js/plugins/colorpicker/bootstrap-colorpicker.min.js" type="text/javascript"></script>
+        <!-- bootstrap time picker -->
+        <script src="../admin/js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <!-- AdminLTE App -->
+        <script src="../admin/js/AdminLTE/app.js" type="text/javascript"></script>
+
+        <!-- Page script -->
+        <script type="text/javascript">
+            $(function() {
+                //Datemask dd/mm/yyyy
+                $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+                //Datemask2 mm/dd/yyyy
+                $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+                //Money Euro
+                $("[data-mask]").inputmask();
+
+                //Date range picker
+                $('#reservation').daterangepicker();
+                //Date range picker with time picker
+                $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+                //Date range as a button
+                $('#daterange-btn').daterangepicker(
+                        {
+                            ranges: {
+                                'Today': [moment(), moment()],
+                                'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                                'Last 7 Days': [moment().subtract('days', 6), moment()],
+                                'Last 30 Days': [moment().subtract('days', 29), moment()],
+                                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                            },
+                            startDate: moment().subtract('days', 29),
+                            endDate: moment()
+                        },
+                function(start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                }
+                );
+
+                //iCheck for checkbox and radio inputs
+                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal',
+                    radioClass: 'iradio_minimal'
+                });
+                //Red color scheme for iCheck
+                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                    checkboxClass: 'icheckbox_minimal-red',
+                    radioClass: 'iradio_minimal-red'
+                });
+                //Flat red color scheme for iCheck
+                $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                    checkboxClass: 'icheckbox_flat-red',
+                    radioClass: 'iradio_flat-red'
+                });
+
+                //Colorpicker
+                $(".my-colorpicker1").colorpicker();
+                //color picker with addon
+                $(".my-colorpicker2").colorpicker();
+
+                //Timepicker
+                $(".timepicker").timepicker({
+                    showInputs: false
+                });
+            });
+        </script>
+				
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
             
