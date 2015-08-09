@@ -52,7 +52,7 @@
     
     try{
 	
-    if (email == null){
+    if (userdetails == null){
     	response.sendRedirect("../public/index.jsp");
     }else {
     	
