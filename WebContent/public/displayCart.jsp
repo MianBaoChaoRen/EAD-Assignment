@@ -46,7 +46,14 @@
 </head>
 
 <body>
-	<%String name = (String) session.getAttribute("name"); %>
+	<%
+		String [] userdetails = (String []) session.getAttribute("userdetails");
+		try{
+			
+		    if (userdetails == null){
+		    	response.sendRedirect("../public/index.jsp");
+		    }else {
+	%>
 
 	
 	<!-- Navigation -->
@@ -66,7 +73,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Welcome <%=name %></a>
+                        <a href="#">Welcome <%=userdetails[0] %></a>
                     </li>
                     <li>
                         <a href="../public/memberprofile.jsp">Profile</a>
@@ -170,7 +177,12 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-
+	<%
+    }
+    	} catch(Exception e){
+			out.println(e);
+		}
+%>
 </body>
 
 </html>

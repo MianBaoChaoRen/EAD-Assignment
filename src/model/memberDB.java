@@ -114,30 +114,36 @@ public class memberDB {
 		
 	}
 	
-	public String getname(String email){
+	public String[] getdetails(String email){
 		try{
 			Connection conn=connDB.getConnectionDB();
 			
 			String name = null;
+			String contact = null;
+			String address = null;
+			
 			
 			String getname = "Select * from member where email = ?";
 			
-			PreparedStatement getnamepstmt = conn.prepareStatement(getname);
+			PreparedStatement getdetpstmt = conn.prepareStatement(getname);
 			
-			getnamepstmt.setString(1, email);
+			getdetpstmt.setString(1, email);
 			
-			ResultSet rs = getnamepstmt.executeQuery();
+			ResultSet rs = getdetpstmt.executeQuery();
 			
 			while(rs.next()){
 				name = rs.getString("name");
+				contact = rs.getString("contact");
+				address = rs.getString("address");
 			}
-			
-			return name;
+			String [] details = {name, contact, email, address};
+			return details;
 		}catch(Exception e){
 			System.out.println(e);
 			return null;
 		}
 	}
+	
 }
 
 

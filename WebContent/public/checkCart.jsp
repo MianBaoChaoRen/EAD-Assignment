@@ -55,83 +55,26 @@
 			i.value = i.defaultValue;
 			i.style.color = "#888";
 		}
-<<<<<<< HEAD
+
 	}
-=======
-	}	
->>>>>>> origin/master
+
+		
+
 </script>
 </head>
 
 <body>
-<<<<<<< HEAD
+
 	<%
-		String name = (String) session.getAttribute("name"); 
+		String [] userdetails = (String []) session.getAttribute("userdetails");
+	  	try{
+			
+		    if (userdetails == null){
+		    	response.sendRedirect("../public/index.jsp");
+		    }else {
 	%>
-=======
-<<<<<<< HEAD
-	<script>
-		function chkForm() {
-			var contactField = document.getElementById("contact");
-			var emailField = document.getElementById("email");
-			var nameField = document.getElementById("name");
-			var addressField = document.getElementById("address");
 
-			var contact = contactField.value;
-			var email = emailField.value;
-			var name = nameField.value;
-			var address = addressField.value;
 
-			var error = false;
-			var errMsg = "";
-
-			var contactval = /^[0-9]{8,8}$/; //contact validation
-			var validcontact = contactField.value.match(contactval);
-
-			var emailval = /^([a-zA-Z0-9]{3,})+([@]{1,1})+[a-zA-Z_]+\.[a-zA-Z]{3,}$/;
-			var validemail = emailField.value.match(emailval);
-
-			var passwordval = /^[a-zA-Z0-9]{8,}$/;
-			var validpassword = passwordField.value.match(passwordval);
-
-			if (email == "" && contact == "" && name == "" && address == "") {
-				error = true;
-				errMsg += "Please ensure all Fields are filled <br/>";
-			} else if (name == "") {
-				error = true;
-				errMsg += "Please enter your Name <br/>";
-			} else if (contact == "") {
-				error = true;
-				errMsg += "Please enter your Contact Number<br/>";
-			} else if (address == "") {
-				error = true;
-				errMsg += "Please enter your Address <br/>";
-			} else if (email == "") {
-				error = true;
-				errMsg += "Please enter your Email<br/>";
-			} else if (validemail == null) {
-				error = true;
-				errMsg += "Please enter a Valid Email <br/>";
-			} else if (validcontact == null) {
-				error = true;
-				errMsg += "Please enter a 8 digit Contact <br/>";
-			}
-
-			if (error) {
-				var msgBox = document.getElementById("msgBox");
-				msgBox.innerHTML = errMsg;
-				return false;
-			} else {
-				return true;
-			}
-			alert(msgBox);
-		}
-=======
-		<script>
-
->>>>>>> origin/master
-	</script>
->>>>>>> 790fde0fde8ef5572a686e8b36a80844c2e19b92
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -149,7 +92,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Welcome <%=name %></a>
+                        <a href="#">Welcome <%=userdetails[0] %></a>
                     </li>
                     <li>
                         <a href="../public/memberprofile.jsp">Profile</a>
@@ -195,7 +138,7 @@
 					i++;
 		%>
 		<form action="UpdateCartServlet" id="uForm"></form>
-		<form action="BuyCartServlet" id="bForm">
+
 		<div class="product">
 			<div class="product-image">
 				<img src="<%=c.getImagePath()%>">
@@ -224,7 +167,6 @@
 
 			}
 		%>
-<<<<<<< HEAD
 		<form action="BuyCartServlet" id="bForm">
 			<div class="totals">
 
@@ -244,108 +186,43 @@
 					<label>Grand Total</label>
 					<div class="totals-value" id="cart-total"><%=totals%></div>
 				</div>
-				<div class="totals-item">
-					<input type="submit" class="checkout" onclick="chkForm()"
-						value="BuyNow">
-					<button class="back" form="uForm">Update</button>
-				</div>
 
-
-				<div class="totals-item2">
-					<label>Name</label>
-					<div class="totals-value2">
-						<input type="text" name="name" id="name"
-							style="color: #888; width: 300px;" value="Name"
-							onfocus="inputFocus(this)" onblur="inputBlur(this)" />
-=======
-		
-		<div class="totals">
-		
-			<div class="totals-item">
-				<label>Subtotal</label>
-				<div class="totals-value" id="cart-subtotal"><%=subtotals%></div>
-			</div>
-			<div class="totals-item">
-				<label>Tax (5%)</label>
-				<div class="totals-value" id="cart-tax"><%=tax %></div>
-			</div>
-			<div class="totals-item">
-				<label>Shipping (2%)</label>
-				<div class="totals-value" id="cart-shipping"><%=shipping %></div>
-			</div>
-			<div class="totals-item totals-item-total">
-				<label>Grand Total</label>
-				<div class="totals-value" id="cart-total"><%=totals %></div>
-			</div>
-
-			
 			
 				<div class="totals-item2">
 					<label>Name</label>
 					<div class="totals-value2">
-						<input type="text" name="name" id = "name" style="color: #888; width: 300px;" value="Name"
-							onfocus="inputFocus(this)" onblur="inputBlur(this)" >
->>>>>>> origin/master
+					<%=userdetails[0] %>
+					<input type = "hidden" name = "name" id = "name" value = "<%=userdetails[0] %>">
 					</div>
 				</div>
 				<div class="totals-item2">
 					<label>Contact</label>
 					<div class="totals-value2">
-<<<<<<< HEAD
-						<input type="tel" name="contact" id="contact"
-							style="color: #888; width: 300px;" value="Contact"
-							onfocus="inputFocus(this)" onblur="inputBlur(this)" />
-=======
-						<input type="tel" name="contact" id = "contact" style="color: #888; width: 300px;"
-							value="Contact" onfocus="inputFocus(this)"
-							onblur="inputBlur(this)" >
->>>>>>> origin/master
+					<%=userdetails[1] %>
+					<input type = "hidden" name = "contact" id = "contact" value = "<%=userdetails[1] %>">
 					</div>
 				</div>
 				<div class="totals-item2">
 					<label>Email</label>
 					<div class="totals-value2">
-<<<<<<< HEAD
-						<input type="email" name="email" id="email"
-							style="color: #888; width: 300px;" value="example@email.com"
-							onfocus="inputFocus(this)" onblur="inputBlur(this)" />
-=======
-						<input type="email" name="email" id = "email" style="color: #888; width: 300px;"
-							value="example@email.com" onfocus="inputFocus(this)"
-<<<<<<< HEAD
-							onblur="inputBlur(this)" >	
-=======
-							onblur="inputBlur(this)" >
->>>>>>> origin/master
->>>>>>> 790fde0fde8ef5572a686e8b36a80844c2e19b92
+					<%=userdetails[2] %>
+					<input type = "hidden" name = "email" id = "email" value = "<%=userdetails[2] %>">
 					</div>
 				</div>
+				
 				<div class="totals-item2">
 					<label>Mailing Address</label>
 					<div class="totals-value2">
-<<<<<<< HEAD
-						<input type="text" name="address" id="address"
-							style="color: #888; width: 300px;" value="Address"
-							onfocus="inputFocus(this)" onblur="inputBlur(this)" />
-=======
-						<input type="text" name="address" id = "address" style="color: #888; width: 300px;"
-							value="Address" onfocus="inputFocus(this)"
-							onblur="inputBlur(this)" >
->>>>>>> origin/master
+					<%=userdetails[3] %>
+					<input type = "hidden" name = "address" id = "address" value = "<%=userdetails[3] %>">
 					</div>
 				</div>
+				
 				<div class="totals-item2">
 					<label>Credit Card No</label>
 					<div class="totals-value2">
-<<<<<<< HEAD
-						<input type="text" name="creditcard"
-							style="color: #888; width: 300px;" value="Credit Card"
+						<input type="text" name="creditcard" id = "creditcard" style="color: #888; width: 300px;" value="Credit Card"
 							onfocus="inputFocus(this)" onblur="inputBlur(this)" />
-=======
-						<input type="text" name="creditcard" id = "creditcard" style="color: #888; width: 300px;"
-							value="Credit Card" onfocus="inputFocus(this)"
-							onblur="inputBlur(this)" >
->>>>>>> origin/master
 					</div>
 				</div>
 
@@ -359,25 +236,11 @@
 						</select>
 					</div>
 				</div>
+				
 				<div class="totals-item2">
 					<label>Expire Date</label>
 					<div class="totals-value2">
-<<<<<<< HEAD
-						<select id="month" name="month">
-							<option value="01">1</option>
-							<option value="02">2</option>
-							<option value="03">3</option>
-							<option value="04">4</option>
-							<option value="05">5</option>
-							<option value="06">6</option>
-							<option value="07">7</option>
-							<option value="08">8</option>
-							<option value="09">9</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-						</select> <select id="year" name="year">
-=======
+
 						<select id="month" name = "month" style="color: #888; width: 150px;"
 							onfocus="inputFocus(this)" onblur="inputBlur(this)">
 							<option value="01">1</option>
@@ -392,11 +255,9 @@
 						    <option value="10">10</option>
 						    <option value="11">11</option>
 						    <option value="12">12</option>
-						</select>
-					
+						</select>	
 						<select id="year" name="year" style="color: #888; width: 150px;"
 							onfocus="inputFocus(this)" onblur="inputBlur(this)">
->>>>>>> origin/master
 							<option value="2021">2021</option>
 							<option value="2020">2020</option>
 							<option value="2019">2019</option>
@@ -522,95 +383,50 @@
 						</select>
 					</div>
 				</div>
+				
 				<div class="totals-item2">
-					<label>CVC/CVC</label>
+					<label>CVC/CVV</label>
 					<div class="totals-value2">
-<<<<<<< HEAD
-						<input type="text" name="cvc" style="color: #888; width: 300px;"
-							value="001" onfocus="inputFocus(this)" onblur="inputBlur(this)" />
+						<input type="text" name="cvc" id = "cvc" style="color: #888; width: 300px;"
+							value="CVC/CVV" onfocus="inputFocus(this)" onblur="inputBlur(this)" />
 					</div>
 				</div>
-				<div id="msgBox"></div>
+				<div class="totals-item">
+					<input type = "submit" class="checkout" onclick = "return chkForm()" value = "BuyNow">
+					<button class="back" form="uForm">Update</button>
+				</div>
 			</div>
 		</form>
 
-=======
-						<input type="text" name="cvc" id = "cvc" style="color: #888; width: 300px;"
-							value="001" onfocus="inputFocus(this)"
-							onblur="inputBlur(this)" />
-					</div>
-				</div>
-				
-			<div class="totals-item">
-				<input type = "submit" class="checkout" onclick = "return chkForm()" value = "BuyNow">
-				<button class="back" form="uForm">Update</button>
-			</div>
-
-				</div>
-				
-			</form>
+</div>
 			
-		
->>>>>>> origin/master
 
-
-
-	</div>
-	<script>
+<script>
 	 function chkForm(){
-		 	var name=document.getElementById("name").value;
-		 	var contact=document.getElementById("contact").value;
-		 	var email=document.getElementById("email").value;
-		 	var emailsession=document.getElementById("emailsession").value;
-		 	var name=document.getElementById("name").value;
-		 	var address=document.getElementById("address").value;
+
 			var creditcard=document.getElementById("creditcard").value;
 			var cvc = document.getElementById("cvc").value;
 		 	
 		 	var error=false;
 		 	var errMsg="";
-			
-		 	var validname = name.match("^[a-zA-z ]{1,64}$")
-		 	
-		 	var validcontact= contact.match("^[0-9]{8,8}$");
-				
-		 	var validemail = email.match("^([a-zA-Z0-9]{3,})+([@]{1,1})+[a-zA-Z_]+\.[a-zA-Z]{3,}$");
 		 	
 		 	var validcreditcard = creditcard.match("^[0-9]{16,16}$");
 		 	
 		 	var validcvc = cvc.match("^[0-9]{3,3}$");
 		 	
-		 	if (name == "" && email == "" && contact =="" && name =="" && address =="" && creditcard == "" && cvc == ""){
+		 	if ((creditcard == "" && cvc == "") || (creditcard == "Credit Card" && cvc == "CVC/CVV")){
 		 		error=true;
 		 		errMsg+="Please ensure all Fields are filled";	 		
-		 	}else if (name=="" || name=="Name" || validname == null){
-		 		error=true;
-		 		errMsg+="Please enter your Name";
-		 	}else if (contact=="" || contact == "Contact"){
-		 		error=true;
-		 		errMsg+="Please enter your Contact Number";
-		 	}else if(email == "" || email == "example@email.com"){
-		 		error=true;
-		 		errMsg+="Please enter your Email";	
-		 	}else if (address=="" || address == "Address"){
-		 		error=true;
-		 		errMsg+="Please enter your Address";
 		 	}else if(creditcard == "" || creditcard == "Credit Card"){
 		 		error=true;
 		 		errMsg+="Please enter your Credit Card number";
-		 	}else if(cvc == ""){
-		 		error=true;
-		 		errMsg+="Please enter your CVC number";
-		 	}else if (validemail == null) {
-		 		error=true;
-		 		errMsg+="Please enter a Valid Email";
-		 	}else if (validcontact == null){
-		 		error=true;
-		 		errMsg+="Please enter a 8 digit Contact";
 		 	}else if (validcreditcard == null){
 		 		error=true;
 		 		errMsg+="Please enter a valid 16 digit Credit Card number";
-		 	}else if(cvc == null){
+		 	}else if(cvc == "" || cvc == "CVC/CVV"){
+		 		error=true;
+		 		errMsg+="Please enter your CVC number";
+		 	}else if(validcvc == null || cvc == "000"){
 		 		error=true;
 		 		errMsg+="Please enter a valid 3 digit CVC";
 		 	}
@@ -623,6 +439,12 @@
 		 	}
 		 	
 		 }
-	</script>
+</script>
+	<%
+    }
+    	} catch(Exception e){
+			out.println(e);
+		}
+	%>
 </body>
 </html>

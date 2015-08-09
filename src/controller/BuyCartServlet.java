@@ -45,13 +45,10 @@ public class BuyCartServlet extends HttpServlet {
 		String exmonth = request.getParameter("month");
 		String exyear = request.getParameter("year");
 		String cvc = request.getParameter("cvc");
-
-		String [] userDetails = {name, contact, email, address};
-
 		
 		String orderid = String.valueOf(db.recordCart(name, contact, email, address, creditcard, cardtype, exmonth, exyear, cvc, al));
 		session.setAttribute("orderid", orderid);
-		session.setAttribute("userdetails", userDetails);
+		session.setAttribute("creditcard", creditcard);
 		response.sendRedirect("summaryCart.jsp");
 	}
 

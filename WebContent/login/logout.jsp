@@ -8,7 +8,10 @@
 </head>
 <body>
 	<%
-		session.invalidate();
+		
+    	String [] userdetails = (String []) session.getAttribute("userdetails");
+		userdetails = null;
+		session.setAttribute("userdetails", userdetails);
 	
 		response.sendRedirect("../public/index.jsp");
 	

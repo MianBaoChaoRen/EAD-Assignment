@@ -48,8 +48,7 @@
     
 	Statement stmt= conn.createStatement();
 
-	String name2 = (String) session.getAttribute("name");
-    String email = (String) session.getAttribute("email");
+	String [] userdetails = (String []) session.getAttribute("userdetails");
     
     try{
 	
@@ -78,7 +77,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Welcome <%=name2 %></a>
+                        <a href="#">Welcome <%=userdetails[0] %></a>
                     </li>
                     <li>
                         <a href="../public/memberprofile.jsp">Profile</a>
@@ -113,7 +112,7 @@
 			insert content here 
 			
 			<%
-				String updateprofilesql="select * from member where email = '"+email+"'";
+				String updateprofilesql="select * from member where email = '"+userdetails[3]+"'";
             		
 				ResultSet profilers= stmt.executeQuery(updateprofilesql);
 			%>

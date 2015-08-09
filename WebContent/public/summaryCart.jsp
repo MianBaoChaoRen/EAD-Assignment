@@ -47,7 +47,15 @@
 
 <body>
 	<%
-		String name = (String) session.getAttribute("name"); 	
+	String [] userdetails = (String []) session.getAttribute("userdetails");
+	String creditcard = String.valueOf(session.getAttribute("creditcard"));
+	creditcard = (creditcard.substring(0, 4) + "************" + (creditcard.substring(12, 16)));
+	
+  	try{
+		
+	    if (userdetails == null){
+	    	response.sendRedirect("../public/index.jsp");
+	    }else {
 	%>
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -66,7 +74,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Welcome <%=name %></a>
+                        <a href="#">Welcome <%=userdetails[0] %></a>
                     </li>
                     <li>
                         <a href="../public/memberprofile.jsp">Profile</a>
@@ -100,8 +108,6 @@
 		</div>
 		<%
 			ArrayList<Cart> al = (ArrayList<Cart>) session.getAttribute("cart");
-			String[] userdetails = (String[]) session.getAttribute("userdetails");
-			
 					
 			int subtotals = 0;
 			int tax = 0;
@@ -179,8 +185,20 @@
 					<%=userdetails[3] %>
 				</div>
 			</div>
+			<div class="totals-item2">
+				<label>Credit Card No</label>
+				<div class="totals-value2">
+					<%=creditcard %>
+				</div>
+			</div>
 		</div>
 
 	</div>
+	<%
+    }
+    	} catch(Exception e){
+			out.println(e);
+		}
+	%>
 </body>
 </html>

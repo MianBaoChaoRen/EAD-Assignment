@@ -58,7 +58,7 @@ public class CartDB {
 				int memberID = 0;
 				String orderid = "select orderid from ordercart";
 				
-				String memberid = "select memberID from member where email = ?";
+				String memberid = "select memberID from member where email = ? && contact = ?";
 				
 				String sql = "insert into ordercart (orderid, memberid, name, contact, email, address, creditcard, cardtype, exmonth, exyear, cvc, productID, quantity, totalprice)" + 
 						" Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -70,6 +70,7 @@ public class CartDB {
 				PreparedStatement pstmt3 = conn.prepareStatement(memberid);
 				
 				pstmt3.setString(1, email);
+				pstmt3.setString(2, contact);
 				
 				ResultSet rs = pstmt.executeQuery();
 				ResultSet rs2 = pstmt3.executeQuery();
@@ -90,21 +91,20 @@ public class CartDB {
 			
 				pstmt2.setInt(1, orderID);	
 				pstmt2.setInt(2, memberID);				
+				pstmt2.setString(3, name);
+				pstmt2.setString(4, contact);
+				pstmt2.setString(5, email);
+				pstmt2.setString(6, address);
+				pstmt2.setString(7, creditcard);
+				pstmt2.setString(8, cardtype);
+				pstmt2.setString(9, exmonth);
+				pstmt2.setString(10, exyear);
+				pstmt2.setString(11, cvc);
+				
 				for(Cart c: al){
-					
-					pstmt2.setString(3, name);
-					pstmt2.setString(4, contact);
-					pstmt2.setString(5, email);
-					pstmt2.setString(6, address);
-					pstmt2.setString(7, creditcard);
-					pstmt2.setString(8, cardtype);
-					pstmt2.setString(9, exmonth);
-					pstmt2.setString(10, exyear);
-					pstmt2.setString(11, cvc);
 					pstmt2.setInt(12, c.getProductID());
 					pstmt2.setInt(13, c.getQuantity());
-					pstmt2.setInt(14, c.getTotalPrice());
-					
+					pstmt2.setInt(14, c.getTotalPrice());					
 					pstmt2.executeUpdate();
 				}	
 				return orderID;

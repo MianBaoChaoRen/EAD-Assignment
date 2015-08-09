@@ -73,14 +73,13 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session=request.getSession();
 		
-		String name = db.getname(email);
+		String [] userdetails = (String [])db.getdetails(email);
 		
 		if (success == 1){ 
 			session.setAttribute("email", email);
 			response.sendRedirect("../admin/dashboard.jsp");
 		} else if (success == 2) {
-			session.setAttribute("email", email);
-			session.setAttribute("name", name);
+			session.setAttribute("userdetails", userdetails);
 			response.sendRedirect("../public/index.jsp");
 		} else if (success == 3){
 			session.setAttribute("email", email);
