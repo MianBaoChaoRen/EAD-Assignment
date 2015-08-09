@@ -41,3 +41,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+<<<<<<< HEAD
+=======
+build/classes/model/CartDB.class
+WebContent/public/checkCart.jsp
+>>>>>>> d7d5b44e8a47b7e748a66d150803cf72ca5b53fe
