@@ -93,7 +93,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                           	<ul class="treeview-menu">
-                                <li><a href="sales.jsp"><i class="fa fa-angle-double-right"></i> Month</a></li>
+                                <li class="active"><a href="sales.jsp"><i class="fa fa-angle-double-right"></i> Date Range</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -127,6 +127,17 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="viewalladmin.jsp"><i class="fa fa-angle-double-right"></i> View All Members</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-folder"></i>
+                                <span>Navigation</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="../public/index.jsp"><i class="fa fa-angle-double-right"></i> Public Page</a></li>
+                                <li><a href="../login/logout.jsp"><i class="fa fa-angle-double-right"></i> Log Out</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -101,7 +101,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                           	<ul class="treeview-menu">
-                                <li class="active"><a href="sales.jsp"><i class="fa fa-angle-double-right"></i> Month</a></li>
+                                <li class="active"><a href="sales.jsp"><i class="fa fa-angle-double-right"></i> Date Range</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -177,7 +177,8 @@
                 
                 for (Order o: al){
                 	counter++;
-                	String top10productname = db.top10productname(o.getProductID());
+                	int productid = o.getProductID();
+                	String top10productname = db.top10productname(productid);
                 	%>
                 	<tr>
                 		<td><%=counter %></td>

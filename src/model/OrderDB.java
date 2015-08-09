@@ -11,7 +11,7 @@ public class OrderDB {
 			
 			ArrayList<Order> al = new ArrayList<Order>();
 			
-			String sqlstr = "select `index`,`memberID`, `orderNum`,`orderdate`,`name`,`contact`,`email`,`address`,`creditcard`,`cardtype`,`exmonth`,`exyear`,`cvc`,`productID`,`totalprice`,`quantity`, COUNT(`orderNum`) AS `top` from `order` where orderdate between ? and ? group by `productID` ORDER by 16 DESC LIMIT 10";
+			String sqlstr = "select `index`,`memberID`, `orderNum`,`orderdate`,`name`,`contact`,`email`,`address`,`creditcard`,`cardtype`,`exmonth`,`exyear`,`cvc`,`productID`,`totalprice`,`quantity`, COUNT(`orderNum`) AS `top` from `order` where orderdate between ? and ? group by `productID` ORDER by 17 DESC LIMIT 10";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sqlstr);
 			
@@ -40,23 +40,23 @@ public class OrderDB {
 		try{
 			Connection conn=connDB.getConnectionDB();
 			
-			String sqlstr = "select * from product where ProductID =?";
+			String SDsqlstr = "select * from product where ProductID =?";
 			
-			PreparedStatement pstmt = conn.prepareStatement(sqlstr);
+			PreparedStatement SDpstmt = conn.prepareStatement(SDsqlstr);
 			
-			pstmt.setInt(1, productid);
+			SDpstmt.setInt(1, productid);
 			
-			ResultSet rs=pstmt.executeQuery();
+			ResultSet SDrs=SDpstmt.executeQuery();
 			String shortdesc="";
-			while (rs.next()){
-				shortdesc = rs.getString("ShortDesc");
-				System.out.println(shortdesc);
-			}
 			
-			return shortdesc;
+			while (SDrs.next()){
+				shortdesc = SDrs.getString("ShortDesc");
+				return shortdesc;
+			}
 		}catch (Exception e){
 			System.out.println(e);
 			return null;
 		}
+		return null;
 	}
 }

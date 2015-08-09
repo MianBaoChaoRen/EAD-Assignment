@@ -90,6 +90,16 @@
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-folder"></i>
+                                <span>Sales Report</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                          	<ul class="treeview-menu">
+                                <li class="active"><a href="sales.jsp"><i class="fa fa-angle-double-right"></i> Date Range</a></li>
+                            </ul>
+                        </li>
                         <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-folder"></i>
